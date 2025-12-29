@@ -1,6 +1,7 @@
 
 import React, { useState, useCallback, useMemo, useEffect } from 'react';
-import { useDropzone } from 'react-dropzone-esm';
+// Changed from 'react-dropzone-esm' to 'react-dropzone' for better build compatibility
+import { useDropzone } from 'react-dropzone';
 import {
   PhysiqueAnalysisReport,
   WorkoutPlan,
@@ -715,7 +716,7 @@ const ReportView = ({ report, workoutPlan, mealGuide, onStartNewAnalysis, onBack
                                 <RadarChartComponent data={report.muscleAnalysis} />
                             </div>
                             <div className="space-y-4">
-                               <div className="bg-gray-900/50 p-6 rounded-xl border border-gray-800">
+                                <div className="bg-gray-900/50 p-6 rounded-xl border border-gray-800">
                                     <h4 className="text-lg font-semibold text-green-400">Overall Score: {report.physiqueRating.overallScore}/10</h4>
                                     <p className="text-gray-300 mt-2">{report.physiqueRating.summary}</p>
                                 </div>
