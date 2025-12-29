@@ -1,0 +1,74 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Physique Check - Login</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: black;
+            color: white;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Montserrat', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-black flex items-center justify-center min-h-screen relative overflow-hidden">
+    
+    <!-- Background Accents -->
+    <div class="absolute top-0 left-0 w-full h-full overflow-hidden z-0">
+        <div class="absolute top-[-10%] right-[-10%] w-[40%] h-[40%] bg-green-500/10 rounded-full blur-[100px]"></div>
+    </div>
+
+    <div class="w-full max-w-md p-8 z-10">
+        <div class="text-center mb-8">
+            <a href="landingpage.html" class="inline-block mb-4">
+                <svg class="w-12 h-12 text-white mx-auto" viewBox="0 0 100 100" fill="none"><path d="M50 10 C 70 10, 85 25, 85 45 C 85 70, 65 90, 50 90 C 35 90, 15 70, 15 45 C 15 25, 30 10, 50 10 Z" stroke="currentColor" stroke-width="5" /><path d="M35 50 L48 63 L65 40" stroke="#31FF75" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" /></svg>
+            </a>
+            <h2 class="text-3xl font-bold">Welcome Back</h2>
+            <p class="text-gray-400 mt-2">Login to continue your progress.</p>
+        </div>
+
+        <div class="bg-gray-900/50 border border-gray-800 rounded-xl p-8 shadow-2xl backdrop-blur-sm">
+            <form id="login-form" class="space-y-4">
+                
+                <div>
+                    <label class="block text-sm font-medium text-gray-300 mb-1">Email Address</label>
+                    <input type="email" id="email" required placeholder="john@example.com" class="w-full bg-gray-800 border-gray-700 rounded-lg p-3 text-white focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition-all">
+                </div>
+
+                <div>
+                    <div class="flex justify-between items-center mb-1">
+                        <label class="block text-sm font-medium text-gray-300">Password</label>
+                        <a href="#" class="text-xs text-green-400 hover:text-green-300">Forgot?</a>
+                    </div>
+                    <input type="password" id="password" required placeholder="••••••••" class="w-full bg-gray-800 border-gray-700 rounded-lg p-3 text-white focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition-all">
+                </div>
+
+                <button type="submit" class="w-full bg-green-500 text-black font-bold py-3 rounded-lg hover:bg-green-400 transition-colors mt-2">
+                    Login
+                </button>
+            </form>
+
+            <div class="text-center mt-6">
+                <p class="text-gray-400 text-sm">Don't have an account? <a href="signup.html" class="text-green-400 hover:text-green-300 font-semibold">Sign Up</a></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('login-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            // In a real app, verify credentials here.
+            // For now, assume login success.
+            localStorage.setItem('physique_app_state', 'dashboard');
+            window.location.href = 'home.html';
+        });
+    </script>
+</body>
+</html>

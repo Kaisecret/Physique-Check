@@ -1,0 +1,22 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Logging out...</title>
+    <script>
+        // Clear all app state
+        localStorage.removeItem('physique_app_state');
+        localStorage.removeItem('physique_current_report');
+        localStorage.removeItem('physique_plans');
+        // Optional: Clear history if you want a hard reset, but usually history is kept
+        // localStorage.removeItem('physique_history'); 
+        
+        // Redirect to landing page
+        window.location.href = 'landingpage.html';
+    </script>
+</head>
+<body style="background: #000; color: #fff; font-family: sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh;">
+    <p>Logging you out...</p>
+</body>
+</html>

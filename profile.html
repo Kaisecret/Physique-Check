@@ -1,0 +1,337 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Physique Check - Profile</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script type="importmap">
+    { "imports": { "@google/genai": "https://aistudiocdn.com/@google/genai@^1.29.1" } }
+    </script>
+</head>
+<body class="bg-black text-white" data-page="profile">
+
+    <div class="relative min-h-screen flex">
+        <!-- Sidebar -->
+        <aside id="sidebar" class="fixed top-0 left-0 h-screen bg-gray-900 text-white z-50 flex flex-col w-64 hidden md:flex border-r border-gray-800 transition-all duration-300">
+            <div class="flex items-center px-6 h-20 border-b border-gray-800 overflow-hidden">
+                <svg class="w-8 h-8 text-white flex-shrink-0" viewBox="0 0 100 100" fill="none"><path d="M50 10 C 70 10, 85 25, 85 45 C 85 70, 65 90, 50 90 C 35 90, 15 70, 15 45 C 15 25, 30 10, 50 10 Z" stroke="currentColor" stroke-width="5" /><path d="M35 50 L48 63 L65 40" stroke="#31FF75" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" /></svg>
+                <span class="text-xl font-bold ml-3 sidebar-text whitespace-nowrap">Physique Check</span>
+            </div>
+            <nav class="flex-1 px-2 py-4 space-y-2">
+                <a href="home.html" class="w-full flex items-center p-3 rounded-lg text-gray-300 hover:bg-gray-700/50 hover:text-white transition-colors group">
+                    <svg class="w-6 h-6 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h7.5" /></svg>
+                    <span class="ml-4 sidebar-text whitespace-nowrap">Home</span>
+                </a>
+                <a href="stats.html" class="w-full flex items-center p-3 rounded-lg text-gray-300 hover:bg-gray-700/50 hover:text-white transition-colors group">
+                    <svg class="w-6 h-6 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z" /></svg>
+                    <span class="ml-4 sidebar-text whitespace-nowrap">Your Stats</span>
+                </a>
+                <a href="history.html" class="w-full flex items-center p-3 rounded-lg text-gray-300 hover:bg-gray-700/50 hover:text-white transition-colors group">
+                    <svg class="w-6 h-6 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                    <span class="ml-4 sidebar-text whitespace-nowrap">History</span>
+                </a>
+                <a href="profile.html" class="w-full flex items-center p-3 rounded-lg bg-green-500/20 text-green-400 font-semibold group">
+                    <svg class="w-6 h-6 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+                    <span class="ml-4 sidebar-text whitespace-nowrap">Profile</span>
+                </a>
+            </nav>
+            <div class="px-2 py-4 border-t border-gray-800 space-y-2">
+                <a href="logout.html" class="w-full flex items-center p-3 rounded-lg text-gray-300 hover:bg-red-500/50 hover:text-white transition-colors group">
+                    <svg class="w-6 h-6 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15m3 0l3-3m0 0l-3-3m3 3H9" /></svg>
+                    <span class="ml-4 sidebar-text whitespace-nowrap">Logout</span>
+                </a>
+            </div>
+            <button class="sidebar-toggle absolute -right-3 top-8 bg-gray-700 text-white hover:bg-green-500 rounded-full p-1.5 focus:outline-none">
+                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+            </button>
+        </aside>
+        
+        <!-- Mobile Sidebar Placeholder -->
+        <aside id="mobile-sidebar" class="fixed inset-y-0 left-0 z-50 w-64 bg-gray-900 -translate-x-full transition-transform duration-300 md:hidden">
+            <div class="flex items-center px-6 h-20 border-b border-gray-800"><span class="text-xl font-bold ml-3">Physique Check</span></div>
+            <nav class="px-2 py-4 space-y-2">
+                <a href="home.html" class="block p-3 rounded text-gray-300">Home</a>
+                <a href="stats.html" class="block p-3 rounded text-gray-300">Stats</a>
+                <a href="history.html" class="block p-3 rounded text-gray-300">History</a>
+                <a href="profile.html" class="block p-3 rounded bg-gray-800 text-green-400">Profile</a>
+                <a href="logout.html" class="block p-3 rounded text-red-400">Logout</a>
+            </nav>
+        </aside>
+
+        <div class="main-content flex-1 flex flex-col md:ml-64 transition-all duration-300">
+            <div class="md:hidden sticky top-0 flex items-center p-4 bg-gray-900/80 backdrop-blur-sm border-b border-gray-800 z-30">
+                <button class="sidebar-toggle"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" /></svg></button>
+                <span class="ml-4 font-bold text-xl">Profile</span>
+            </div>
+
+            <div class="p-6 container mx-auto max-w-6xl pb-24">
+                <h2 class="text-4xl font-bold mb-2">Your Profile</h2>
+                <p class="text-gray-400 mb-8">Manage your personal details and fitness preferences.</p>
+
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    
+                    <!-- Left: Identity Card -->
+                    <div class="lg:col-span-1">
+                        <div class="bg-gray-900/50 p-6 rounded-xl border border-gray-800 text-center sticky top-24">
+                            <div class="relative w-32 h-32 mx-auto mb-4 group">
+                                <img id="profile-avatar" src="https://via.placeholder.com/150" alt="Profile" class="w-32 h-32 rounded-full object-cover border-4 border-gray-800 group-hover:border-green-500 transition-colors">
+                                <div id="avatar-overlay" class="absolute inset-0 rounded-full bg-black/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer">
+                                    <span class="text-white font-bold text-xs uppercase">Change</span>
+                                </div>
+                                <input type="file" id="avatar-input" class="hidden" accept="image/*">
+                            </div>
+                            <h3 class="text-2xl font-bold" id="display-name">User</h3>
+                            <p class="text-gray-400 text-sm" id="display-username">@username</p>
+                            <p class="text-green-400 text-sm mt-2" id="display-goal">Muscle Gain</p>
+                        </div>
+                    </div>
+
+                    <!-- Right: Forms -->
+                    <div class="lg:col-span-2 space-y-8">
+                        
+                        <!-- Personal Info -->
+                        <div class="bg-gray-900/50 p-6 rounded-xl border border-gray-800">
+                            <h4 class="font-bold text-lg mb-4 flex items-center gap-2">
+                                <svg class="w-5 h-5 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>
+                                Personal Information
+                            </h4>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-300 mb-2">First Name</label>
+                                    <input type="text" id="prof-fname" class="w-full bg-gray-800 border-gray-700 rounded-md p-2 focus:ring-green-500 focus:border-green-500 text-white">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-300 mb-2">Last Name</label>
+                                    <input type="text" id="prof-lname" class="w-full bg-gray-800 border-gray-700 rounded-md p-2 focus:ring-green-500 focus:border-green-500 text-white">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-300 mb-2">Username</label>
+                                    <input type="text" id="prof-username" class="w-full bg-gray-800 border-gray-700 rounded-md p-2 focus:ring-green-500 focus:border-green-500 text-white">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-300 mb-2">Email</label>
+                                    <input type="email" id="prof-email" class="w-full bg-gray-800 border-gray-700 rounded-md p-2 focus:ring-green-500 focus:border-green-500 text-white">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-300 mb-2">Age</label>
+                                    <input type="number" id="prof-age" class="w-full bg-gray-800 border-gray-700 rounded-md p-2 focus:ring-green-500 focus:border-green-500 text-white">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-300 mb-2">Sex</label>
+                                    <select id="prof-sex" class="w-full bg-gray-800 border-gray-700 rounded-md p-2 focus:ring-green-500 focus:border-green-500 text-white">
+                                        <option value="Male">Male</option>
+                                        <option value="Female">Female</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Fitness Prefs -->
+                        <div class="bg-gray-900/50 p-6 rounded-xl border border-gray-800">
+                            <h4 class="font-bold text-lg mb-4 flex items-center gap-2">
+                                <svg class="w-5 h-5 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
+                                Fitness Preferences
+                            </h4>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-300 mb-2">Primary Goal</label>
+                                    <select id="prof-goal" class="w-full bg-gray-800 border-gray-700 rounded-md p-2">
+                                        <option value="muscle gain">Muscle Gain</option>
+                                        <option value="fat loss">Fat Loss</option>
+                                        <option value="recomposition">Recomposition</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-300 mb-2">Experience</label>
+                                    <select id="prof-experience" class="w-full bg-gray-800 border-gray-700 rounded-md p-2">
+                                        <option value="beginner">Beginner</option>
+                                        <option value="intermediate">Intermediate</option>
+                                        <option value="advanced">Advanced</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-300 mb-2">Equipment</label>
+                                    <select id="prof-equipment" class="w-full bg-gray-800 border-gray-700 rounded-md p-2">
+                                        <option value="gym">Gym</option>
+                                        <option value="home">Home</option>
+                                        <option value="minimal equipment">Minimal Equipment</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-300 mb-2">Time / Workout</label>
+                                    <select id="prof-time" class="w-full bg-gray-800 border-gray-700 rounded-md p-2">
+                                        <option value="20-30 min">20-30 min</option>
+                                        <option value="30-45 min">30-45 min</option>
+                                        <option value="45-60 min">45-60 min</option>
+                                        <option value="60+ min">60+ min</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="flex justify-end">
+                            <button id="save-profile-btn" class="bg-green-500 text-black font-bold py-3 px-8 rounded-lg hover:bg-green-400 transform transition-transform hover:scale-105 shadow-lg shadow-green-500/20">Save Changes</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile Bottom Navigation -->
+    <nav class="fixed bottom-0 left-0 right-0 bg-gray-900 border-t border-gray-800 flex justify-around items-center h-16 z-50 md:hidden">
+        <a href="home.html" class="flex flex-col items-center justify-center w-full h-full text-gray-400 hover:text-white transition-colors">
+            <svg class="w-6 h-6 mb-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h7.5" /></svg>
+            <span class="text-[10px] font-medium">Home</span>
+        </a>
+        <a href="stats.html" class="flex flex-col items-center justify-center w-full h-full text-gray-400 hover:text-white transition-colors">
+            <svg class="w-6 h-6 mb-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z" /></svg>
+            <span class="text-[10px] font-medium">Stats</span>
+        </a>
+        <a href="history.html" class="flex flex-col items-center justify-center w-full h-full text-gray-400 hover:text-white transition-colors">
+            <svg class="w-6 h-6 mb-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+            <span class="text-[10px] font-medium">History</span>
+        </a>
+        <a href="profile.html" class="flex flex-col items-center justify-center w-full h-full text-green-400">
+            <svg class="w-6 h-6 mb-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+            <span class="text-[10px] font-medium">Profile</span>
+        </a>
+    </nav>
+
+    <script type="module">
+        // --- State Management & LocalStorage Helpers ---
+        const STORAGE_KEYS = {
+            PREFERENCES: 'physique_preferences',
+            USER_PROFILE: 'physique_user_profile'
+        };
+
+        const state = {
+            get: (key, defaultVal) => {
+                const val = localStorage.getItem(key);
+                return val ? JSON.parse(val) : defaultVal;
+            },
+            set: (key, val) => localStorage.setItem(key, JSON.stringify(val)),
+        };
+
+        // Default Data
+        const defaultPrefs = {
+            goal: 'muscle gain',
+            experience: 'beginner',
+            equipment: 'gym',
+            time: '45-60 min',
+            sex: 'Male',
+            age: 20
+        };
+
+        const defaultProfile = {
+            firstName: 'User',
+            lastName: 'Name',
+            username: 'user123',
+            email: 'user@example.com',
+            avatar: 'https://via.placeholder.com/150'
+        };
+
+        // --- Logic ---
+        document.addEventListener('DOMContentLoaded', () => {
+            // Sidebar Logic
+            const toggleSidebar = () => {
+                const mobileSidebar = document.getElementById('mobile-sidebar');
+                mobileSidebar.classList.toggle('-translate-x-full');
+            };
+            document.querySelectorAll('.sidebar-toggle').forEach(btn => btn.addEventListener('click', toggleSidebar));
+            const mobileOverlay = document.getElementById('mobile-overlay');
+            if(mobileOverlay) mobileOverlay.addEventListener('click', toggleSidebar);
+
+            // Load Data
+            const prefs = state.get(STORAGE_KEYS.PREFERENCES, defaultPrefs);
+            const profile = state.get(STORAGE_KEYS.USER_PROFILE, defaultProfile);
+
+            // Populate Form
+            const setValue = (id, val) => { const el = document.getElementById(id); if(el) el.value = val; }
+            const setText = (id, val) => { const el = document.getElementById(id); if(el) el.innerText = val; }
+            
+            // Identity
+            setValue('prof-fname', profile.firstName);
+            setValue('prof-lname', profile.lastName);
+            setValue('prof-username', profile.username);
+            setValue('prof-email', profile.email);
+            
+            // Prefs (and sync Shared fields)
+            setValue('prof-goal', prefs.goal);
+            setValue('prof-experience', prefs.experience);
+            setValue('prof-equipment', prefs.equipment);
+            setValue('prof-time', prefs.time);
+            setValue('prof-age', prefs.age);
+            setValue('prof-sex', prefs.sex);
+
+            // Display Cards
+            setText('display-name', `${profile.firstName} ${profile.lastName}`);
+            setText('display-username', `@${profile.username}`);
+            setText('display-goal', prefs.goal.toUpperCase());
+            
+            // Avatar Image
+            const avatarImg = document.getElementById('profile-avatar');
+            if(profile.avatar) avatarImg.src = profile.avatar;
+
+            // Handle Avatar Upload
+            const avatarInput = document.getElementById('avatar-input');
+            const avatarOverlay = document.getElementById('avatar-overlay');
+            
+            avatarOverlay.addEventListener('click', () => avatarInput.click());
+            
+            avatarInput.addEventListener('change', (e) => {
+                const file = e.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        // Update UI
+                        avatarImg.src = e.target.result;
+                        // Update State object (to be saved)
+                        profile.avatar = e.target.result; 
+                    }
+                    reader.readAsDataURL(file);
+                }
+            });
+
+            // Save Changes
+            document.getElementById('save-profile-btn').addEventListener('click', () => {
+                // Gather Profile Data
+                const newProfile = {
+                    firstName: document.getElementById('prof-fname').value,
+                    lastName: document.getElementById('prof-lname').value,
+                    username: document.getElementById('prof-username').value,
+                    email: document.getElementById('prof-email').value,
+                    avatar: profile.avatar // Kept from change event
+                };
+
+                // Gather Prefs Data
+                const newPrefs = {
+                    ...prefs,
+                    goal: document.getElementById('prof-goal').value,
+                    experience: document.getElementById('prof-experience').value,
+                    equipment: document.getElementById('prof-equipment').value,
+                    time: document.getElementById('prof-time').value,
+                    age: document.getElementById('prof-age').value,
+                    sex: document.getElementById('prof-sex').value
+                };
+
+                // Save to Storage
+                state.set(STORAGE_KEYS.USER_PROFILE, newProfile);
+                state.set(STORAGE_KEYS.PREFERENCES, newPrefs);
+
+                // Update UI text immediately
+                setText('display-name', `${newProfile.firstName} ${newProfile.lastName}`);
+                setText('display-username', `@${newProfile.username}`);
+                setText('display-goal', newPrefs.goal.toUpperCase());
+
+                alert("Profile updated successfully!");
+            });
+        });
+    </script>
+</body>
+</html>

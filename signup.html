@@ -1,0 +1,132 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Physique Check - Sign Up</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: black;
+            color: white;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Montserrat', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-black flex items-center justify-center min-h-screen relative overflow-hidden">
+    
+    <!-- Background Accents -->
+    <div class="absolute top-0 left-0 w-full h-full overflow-hidden z-0">
+        <div class="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-green-500/10 rounded-full blur-[100px]"></div>
+        <div class="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-blue-500/10 rounded-full blur-[100px]"></div>
+    </div>
+
+    <div class="w-full max-w-lg p-8 z-10">
+        <div class="text-center mb-8">
+            <a href="landingpage.html" class="inline-block mb-4">
+                <svg class="w-12 h-12 text-white mx-auto" viewBox="0 0 100 100" fill="none"><path d="M50 10 C 70 10, 85 25, 85 45 C 85 70, 65 90, 50 90 C 35 90, 15 70, 15 45 C 15 25, 30 10, 50 10 Z" stroke="currentColor" stroke-width="5" /><path d="M35 50 L48 63 L65 40" stroke="#31FF75" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" /></svg>
+            </a>
+            <h2 class="text-3xl font-bold">Create Account</h2>
+            <p class="text-gray-400 mt-2">Start your fitness journey today.</p>
+        </div>
+
+        <div class="bg-gray-900/50 border border-gray-800 rounded-xl p-8 shadow-2xl backdrop-blur-sm">
+            <form id="signup-form" class="space-y-4">
+                
+                <div>
+                    <label class="block text-sm font-medium text-gray-300 mb-1">Full Name</label>
+                    <input type="text" id="fullname" required placeholder="John Doe" class="w-full bg-gray-800 border-gray-700 rounded-lg p-3 text-white focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition-all">
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-300 mb-1">Username</label>
+                        <input type="text" id="username" required placeholder="@johnfit" class="w-full bg-gray-800 border-gray-700 rounded-lg p-3 text-white focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition-all">
+                    </div>
+                     <div>
+                        <label class="block text-sm font-medium text-gray-300 mb-1">Age</label>
+                        <input type="number" id="age" required placeholder="25" class="w-full bg-gray-800 border-gray-700 rounded-lg p-3 text-white focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition-all">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-300 mb-1">Gender</label>
+                        <select id="gender" class="w-full bg-gray-800 border-gray-700 rounded-lg p-3 text-white focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition-all">
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                     <div>
+                        <label class="block text-sm font-medium text-gray-300 mb-1">Goal</label>
+                        <select id="goal" class="w-full bg-gray-800 border-gray-700 rounded-lg p-3 text-white focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition-all">
+                            <option value="muscle gain">Muscle Gain</option>
+                            <option value="fat loss">Fat Loss</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-300 mb-1">Email Address</label>
+                    <input type="email" id="email" required placeholder="john@example.com" class="w-full bg-gray-800 border-gray-700 rounded-lg p-3 text-white focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition-all">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-300 mb-1">Password</label>
+                    <input type="password" id="password" required placeholder="••••••••" class="w-full bg-gray-800 border-gray-700 rounded-lg p-3 text-white focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition-all">
+                </div>
+
+                <button type="submit" class="w-full bg-green-500 text-black font-bold py-3 rounded-lg hover:bg-green-400 transition-colors mt-6">
+                    Sign Up
+                </button>
+            </form>
+
+            <div class="text-center mt-6">
+                <p class="text-gray-400 text-sm">Already have an account? <a href="login.html" class="text-green-400 hover:text-green-300 font-semibold">Login</a></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('signup-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const userData = {
+                firstName: document.getElementById('fullname').value.split(' ')[0] || 'User',
+                lastName: document.getElementById('fullname').value.split(' ').slice(1).join(' ') || '',
+                username: document.getElementById('username').value,
+                email: document.getElementById('email').value,
+                age: document.getElementById('age').value,
+                gender: document.getElementById('gender').value,
+                avatar: 'https://via.placeholder.com/150' // Default avatar
+            };
+            
+            // Also update preferences based on signup data
+            const userPrefs = {
+                goal: document.getElementById('goal').value,
+                experience: 'beginner',
+                equipment: 'gym',
+                time: '45-60 min',
+                sex: document.getElementById('gender').value,
+                age: document.getElementById('age').value
+            };
+
+            // Save to LocalStorage (Simulating Backend)
+            localStorage.setItem('physique_user_profile', JSON.stringify(userData));
+            localStorage.setItem('physique_preferences', JSON.stringify(userPrefs));
+            
+            // Simulate Login
+            localStorage.setItem('physique_app_state', 'dashboard');
+            
+            // Redirect
+            window.location.href = 'home.html';
+        });
+    </script>
+</body>
+</html>

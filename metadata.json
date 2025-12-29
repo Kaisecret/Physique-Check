@@ -1,0 +1,5 @@
+{
+  "name": "Physique Check — Intelligent Physique Analyzer & Personalized Fitness Blueprint",
+  "description": "A privacy-focused fitness web app that lets users upload simple body photos. The app analyzes their physique, identifies strong and weak muscle groups, gives a physique rating, produces a personalized weekly workout plan, and generates a simple daily meal guide.",
+  "requestFramePermissions": []
+}
