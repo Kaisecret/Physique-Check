@@ -1,9 +1,18 @@
 import { GoogleGenAI, Type } from "@google/genai";
 import { UserPreferences, PhysiqueAnalysisReport, WorkoutPlan, MealGuide, UserProfile } from "../types";
 
-// Ensure process.env.API_KEY is accessed safely without crashing if process is missing
-const apiKey = (typeof process !== 'undefined' && process.env) ? process.env.API_KEY : '';
-const ai = new GoogleGenAI({ apiKey: apiKey });
+// Robust API Key retrieval: Tries Vite's import.meta.env first, then process.env
+const getApiKey = () => {
+  if (typeof import.meta !== 'undefined' && import.meta.env && import.meta.env.VITE_API_KEY) {
+    return import.meta.env.VITE_API_KEY;
+  }
+  if (typeof process !== 'undefined' && process.env && process.env.API_KEY) {
+    return process.env.API_KEY;
+  }
+  return '';
+};
+
+const ai = new GoogleGenAI({ apiKey: getApiKey() });
 
 const fileToGenerativePart = async (file: File) => {
   const base64EncodedDataPromise = new Promise<string>((resolve) => {
