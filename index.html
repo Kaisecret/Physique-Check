@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -15,7 +14,19 @@
       h1, h2, h3, h4, h5, h6 {
         font-family: 'Montserrat', sans-serif;
       }
+      html, body, #root {
+        height: 100%;
+        width: 100%;
+      }
     </style>
+    <!-- CRITICAL: Polyfill process for browser environments before modules load -->
+    <script>
+      window.process = {
+        env: {
+          API_KEY: '' 
+        }
+      };
+    </script>
   <script type="importmap">
 {
   "imports": {
